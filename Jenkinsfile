@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Git Repo Checkout') {
             steps {
-               git branch: 'main', url: 'https://github.com/techpentest/Boardgame.git'
+               git branch: 'lab', url: 'https://github.com/techpentest/Boardgame.git'
             }
         }
         
