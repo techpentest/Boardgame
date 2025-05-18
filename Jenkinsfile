@@ -2,38 +2,30 @@ pipeline {
     agent any
     
     tools {
-        maven 'maven3.9'
-        jdk 'jdk11'
+        maven 'maven3.6'
+        jdk 'jdk17'
     }
-    
+
     stages {
-        stage('Git Repo Checkout') {
+        
+        stage('Compile') {
             steps {
-               git branch: 'main', url: 'https://github.com/techpentest/Boardgame.git'
+             sh 'mvn compile'
             }
         }
-        
-         stage('Compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
-        
-         stage('Test') {
+        stage('test') {
             steps {
                 sh 'mvn test'
             }
         }
-        
-         stage('Validation') {
+        stage('Package') {
             steps {
-                sh 'mvn validate'
+               sh 'mvn package'
             }
         }
-        
-        stage('package') {
+        stage('Hello') {
             steps {
-                sh 'mvn package'
+                echo 'Hello World'
             }
         }
     }
