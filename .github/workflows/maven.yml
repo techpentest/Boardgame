@@ -28,5 +28,5 @@ jobs:
             sudo apt-get install -y wget apt-transport-https gnupg lsb-release
 
     - name: Trivy File scan
-      run: trivy fs -f table -o trivy.report .
+      run: sudo trivy fs -f table -o trivy.report .
 
