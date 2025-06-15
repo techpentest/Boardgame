@@ -31,5 +31,10 @@ jobs:
             sudo apt-get install trivy
 
     - name: Trivy File scan
-      run: trivy fs -f table -o trivy.report .
+      run: trivy fs -f table -o /home/student/trivy.report .
 
+    - name: Sonarqube code analysis
+      uses: sijomc/sonarscan-action@master
+      with:
+        host: ${{ secrets.SONARQUBE_HOST }}
+        login: ${{ secrets.SONARQUBE_TOKEN }}
