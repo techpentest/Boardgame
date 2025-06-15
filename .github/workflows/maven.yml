@@ -44,7 +44,7 @@ jobs:
               docker build -t dockerlabtest001/boardgame:latest .
 
     - name: Trivy Docker Image scan
-      run: trivy image dockerlabtest001/Boardgame:1.0
+      run: trivy image dockerlabtest001/boardgame:1.0
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
