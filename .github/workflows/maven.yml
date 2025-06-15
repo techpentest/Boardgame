@@ -33,8 +33,15 @@ jobs:
     - name: Trivy File scan
       run: trivy fs -f table -o trivy.report .
 
-    - name: Sonarqube code analysis
-      uses: sonarsource/sonarqube-scan-action@master
+    - name: Install SonarScanner
+      run: |
+          sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip
+          sudo unzip sonar-scanner-cli-5.0.1.3006-linux.zip
+          sudo export PATH="$PATH:$(pwd)/sonar-scanner-5.0.1.3006-linux/bin"
+    
+    - name: Run SonarQube Scanner
       env:
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+          sonar-scanner \
+            -Dsonar.login=$SONAR_TOKEN
