@@ -1,4 +1,4 @@
-name: Java App deploy through CICD
+name: Java and Maven App deploy through CICD
 
 on:
   push:
