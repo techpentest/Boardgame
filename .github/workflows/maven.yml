@@ -41,7 +41,7 @@ jobs:
 
     - name: Docker Build Image
       run: |
-              docker build -t dockerlabtest001/boardgame:latest .
+              docker build -t dockerlabtest001/boardgame:1.0 .
 
     - name: Trivy Docker Image scan
       run: trivy image dockerlabtest001/boardgame:1.0
