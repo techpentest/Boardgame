@@ -23,3 +23,5 @@ jobs:
     - name: Aqua Security Trivy installer
       uses: aquasecurity/setup-trivy@v0.2.3
           
+    - name: Trivy File Scan
+      run: trivy fs -f table -o report.json .
