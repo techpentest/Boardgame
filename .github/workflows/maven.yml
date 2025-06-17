@@ -59,7 +59,7 @@ jobs:
 
     - uses: imajeetyadav/kubectl@v1
     - name: Install Kubectl
-      run: kubectl --version
+      run: kubectl version
       
   deploy:
     runs-on: ubuntu-latest
