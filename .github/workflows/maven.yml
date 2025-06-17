@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    
     - uses: actions/checkout@v4
     - name: Set up JDK 17
       uses: actions/setup-java@v4
@@ -46,3 +47,29 @@ jobs:
 
     - name: Docker Image push
       run: docker push dockerlabtest001/boardgame:latest
+
+    - name: Install and Setup aws-cli
+      uses: hannut91/aws-cli@1.18.43
+      with:
+        args: --version
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: us-east-1
+
+    - uses: imajeetyadav/kubectl@v1
+    - name: Install Kubectl
+      run: kubectl --version
+      
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: EKS Cluster Deployment
+        uses: actions/checkout@v2
+      - name: Create/Modify deployment
+        uses: gane5hvarma/kubectl-actions@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: apply -f deployment.yaml
+  
