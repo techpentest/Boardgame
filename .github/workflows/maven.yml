@@ -43,3 +43,6 @@ jobs:
 
     - name: Trivf Docker Image Scan
       run: trivy image dockerlabtest001/boardgame:latest
+
+    - name: Docker Image push
+      run: docker push dockerlabtest001/boardgame:latest
